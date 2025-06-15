@@ -60,21 +60,21 @@ class NewsAnalyzer():
     def retrieve_news_task(self) -> Task:
         return Task(
             config=self.tasks_config['retrieve_news_task'],
-            output_file='report.md'
+    
         )
     
     @task
     def website_scrape_task(self) -> Task:
         return Task(
             config=self.tasks_config['website_scrape_task'],
-            output_file='report.md'
+     
         )
     
     @task
     def ai_news_write_task(self) -> Task:
         return Task(
             config=self.tasks_config['ai_news_write_task'],
-            output_file='report.md'
+  
         )
 
     @task
