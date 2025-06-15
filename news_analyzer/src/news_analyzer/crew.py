@@ -57,18 +57,34 @@ class NewsAnalyzer():
     # task dependencies, and task callbacks, check out the documentation:
     # https://docs.crewai.com/concepts/tasks#overview-of-a-task
     @task
-    def research_task(self) -> Task:
+    def retrieve_news_task(self) -> Task:
         return Task(
-            config=self.tasks_config['research_task'],
+            config=self.tasks_config['retrieve_news_task'],
+            output_file='report.md'
         )
-
+    
     @task
-    def reporting_task(self) -> Task:
+    def website_scrape_task(self) -> Task:
         return Task(
-            config=self.tasks_config['reporting_task'],
+            config=self.tasks_config['website_scrape_task'],
+            output_file='report.md'
+        )
+    
+    @task
+    def ai_news_write_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['ai_news_write_task'],
             output_file='report.md'
         )
 
+    @task
+    def file_write_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['file_write_task'],
+        )
+
+
+    
     @crew
     def crew(self) -> Crew:
         """Creates the NewsAnalyzer crew"""
