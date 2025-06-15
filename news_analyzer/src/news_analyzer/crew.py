@@ -1,5 +1,7 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
+from crewai_tools import ScrapeWebsiteTool , FileWriterTool , SerperDevTool
+
 
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
@@ -18,19 +20,39 @@ class NewsAnalyzer():
     # If you would like to add tools to your agents, you can learn more about it here:
     # https://docs.crewai.com/concepts/agents#agent-tools
     @agent
-    def researcher(self) -> Agent:
+    def retrieve_news(self) -> Agent:
         return Agent(
-            config=self.agents_config['researcher'],
-            verbose=True
+            config=self.agents_config['retrieve_news'],
+            verbose=True,
+            tools= [
+                SerperDevTool()
+            ]
+        )
+        
+    @agent
+    def website_scraper(self) -> Agent:
+        return Agent(
+            config=self.agents_config['website_scraper'],
+            verbose=True,
+            tools=[ ScrapeWebsiteTool() ]
         )
 
     @agent
-    def reporting_analyst(self) -> Agent:
+    def ai_news_writer(self) -> Agent:
         return Agent(
-            config=self.agents_config['reporting_analyst'],
-            verbose=True
+            config=self.agents_config['ai_news_writer'],
+            verbose=True,
+            tools = []
         )
+        
 
+    @agent
+    def file_writer(self) -> Agent:
+        return Agent(
+            config=self.agents_config['file_writer'],
+            verbose=True,
+            tools= [ FileWriterTool()]
+        )
     # To learn more about structured task outputs,
     # task dependencies, and task callbacks, check out the documentation:
     # https://docs.crewai.com/concepts/tasks#overview-of-a-task
