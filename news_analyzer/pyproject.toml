@@ -1,0 +1,23 @@
+[project]
+name = "news_analyzer"
+version = "0.1.0"
+description = "news-analyzer using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.108.0,<1.0.0"
+]
+
+[project.scripts]
+news_analyzer = "news_analyzer.main:run"
+run_crew = "news_analyzer.main:run"
+train = "news_analyzer.main:train"
+replay = "news_analyzer.main:replay"
+test = "news_analyzer.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
